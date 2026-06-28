@@ -1,57 +1,21 @@
-import{
-
-useMutation,
-useQuery,
-useQueryClient
-
-}from"@tanstack/react-query";
-
-import{
-
-getReports,
-generateReport
-
-}from"../services/reportService";
-
-export function useReports(){
-
-const client=
-
-useQueryClient();
-
-const reports=
-
-useQuery({
-
-queryKey:["reports"],
-
-queryFn:getReports
-
-});
-
-const generate=
-
-useMutation({
-
-mutationFn:generateReport,
-
-onSuccess:()=>{
-
-client.invalidateQueries({
-
-queryKey:["reports"]
-
-});
-
-}
-
-});
-
-return{
-
-reports,
-generate
-
-};
-
+import {
+    useMutation,
+    useQuery,
+} from "@tanstack/react-query";
+import {
+    getDashboardReport,
+    exportReport,
+} from "../services/reportService";
+export function useReports() {
+    const report = useQuery({
+        queryKey: ["reports-dashboard"],
+        queryFn: getDashboardReport,
+    });
+    const exportReportMutation = useMutation({
+        mutationFn: exportReport,
+    });
+    return {
+        report,
+        exportReport: exportReportMutation,
+    };
 }

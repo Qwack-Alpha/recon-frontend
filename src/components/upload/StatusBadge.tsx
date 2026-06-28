@@ -1,41 +1,11 @@
 import "./StatusBadge.css";
-
-import type{
-
-FileStatus
-
-}from"../../types/file";
-
-interface Props{
-
-status:FileStatus;
-
+interface Props {
+    status: string;
 }
-
-export default function StatusBadge({
-
-status
-
-}:Props){
-
-return(
-
-<span
-
-className={
-
-"status "+
-
-status.toLowerCase()
-
-}
-
->
-
-{status}
-
-</span>
-
-);
-
+export default function StatusBadge({ status }: Props) {
+    return (
+        <span className={"status " + status.toLowerCase()}>
+            {status}
+        </span>
+    );
 }

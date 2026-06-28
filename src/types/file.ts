@@ -1,43 +1,23 @@
 export type FileStatus =
     | "UPLOADED"
+    | "VALIDATING"
     | "PROCESSING"
-    | "PROCESSED"
+    | "COMPLETED"
     | "FAILED";
-
-export interface UploadFileRequest{
-
-    bank_id:string;
-
-    file:File;
-
+export interface PaymentFile {
+    id: string;
+    bank_id: string;
+    file_name: string;
+    original_name: string;
+    blob_url: string;
+    file_type: string;
+    processing_status: string;
+    total_records: number;
+    valid_records: number;
+    invalid_records: number;
+    created_at: string;
 }
-
-export interface UploadFileResponse{
-
-    success:boolean;
-
-    message:string;
-
-}
-
-export interface PaymentFile{
-
-    id:string;
-
-    filename:string;
-
-    bank_id:string;
-
-    uploaded_at:string;
-
-    status:FileStatus;
-
-}
-
-export interface FileFilter{
-
-    search:string;
-
-    status:"ALL"|FileStatus;
-
+export interface FileFilter {
+    search: string;
+    status: "ALL" | FileStatus;
 }

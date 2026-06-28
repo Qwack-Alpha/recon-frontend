@@ -1,31 +1,12 @@
-export interface SystemSettings{
-
-organization_name:string;
-
-timezone:string;
-
-currency:string;
-
-language:string;
-
-auto_reconciliation:boolean;
-
-ai_enabled:boolean;
-
+export interface AISettings {
+    matching_confidence_threshold: number;
+    amount_tolerance: number;
+    date_tolerance_days: number;
+    exchange_rate_source: string;
 }
-
-export interface UpdateSettingsRequest{
-
-organization_name:string;
-
-timezone:string;
-
-currency:string;
-
-language:string;
-
-auto_reconciliation:boolean;
-
-ai_enabled:boolean;
-
+export interface UpdateAISettingsRequest {
+    matching_confidence_threshold: number;
+    amount_tolerance: number;
+    date_tolerance_days: number;
+    exchange_rate_source: string;
 }

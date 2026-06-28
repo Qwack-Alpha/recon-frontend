@@ -1,21 +1,8 @@
 import api from "../api/client";
-
-import type{
-
-AuditLog
-
-}from"../types/audit";
-
-export async function getAuditLogs(){
-
-const response=
-
-await api.get<AuditLog[]>(
-
-"/audit"
-
-);
-
-return response.data;
-
+import type { AuditLogResponse } from "../types/audit";
+export async function getAuditLogs(): Promise<AuditLogResponse> {
+    const response = await api.get<AuditLogResponse>(
+        "/audit",
+    );
+    return response.data;
 }
