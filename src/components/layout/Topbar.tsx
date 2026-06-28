@@ -1,69 +1,72 @@
 import "./Topbar.css";
 
 import {
-
     MdNotificationsNone,
-
-    MdSearch
-
+    MdSearch,
 } from "react-icons/md";
 
-export default function Topbar(){
+import { useAuth } from "../../auth/useAuth";
 
-return(
+export default function Topbar() {
 
-<header className="topbar">
+    const { user } = useAuth();
 
-<div className="searchBox">
+    const initials = user
+        ? `${user.first_name[0]}${user.last_name[0]}`
+        : "?";
 
-<MdSearch size={20}/>
+    return (
 
-<input
+        <header className="topbar">
 
-placeholder="Search transactions, cases..."
+            <div className="searchBox">
 
-/>
+                <MdSearch size={20} />
 
-</div>
+                <input
+                    placeholder="Search transactions, cases..."
+                />
 
-<div className="topbarRight">
+            </div>
 
-<button className="iconButton">
+            <div className="topbarRight">
 
-<MdNotificationsNone size={24}/>
+                <button className="iconButton">
 
-</button>
+                    <MdNotificationsNone size={22} />
 
-<div className="profile">
+                </button>
 
-<div className="profileAvatar">
+                <div className="profile">
 
-A
+                    <div className="profileAvatar">
 
-</div>
+                        {initials.toUpperCase()}
 
-<div>
+                    </div>
 
-<div className="profileName">
+                    <div>
 
-Admin
+                        <div className="profileName">
 
-</div>
+                            {user?.first_name} {user?.last_name}
 
-<div className="profileRole">
+                        </div>
 
-Administrator
+                        <div className="profileRole">
 
-</div>
+                            {user?.role}
 
-</div>
+                        </div>
 
-</div>
+                    </div>
 
-</div>
+                </div>
 
-</header>
+            </div>
 
-);
+        </header>
+
+    );
 
 }
