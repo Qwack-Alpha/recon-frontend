@@ -1,83 +1,114 @@
 import "./CaseDetailsDrawer.css";
 
-import type{
+import { useState } from "react";
 
-InvestigationCaseResponse
+import type {
+    InvestigationCaseResponse
+} from "../../types/case";
 
-}from"../../types/case";
+import {
+    explain,
+    recommend
+} from "../../services/aiService";
 
-interface Props{
+interface Props {
+    detail: InvestigationCaseResponse | null;
+    onClose: () => void;
+}
 
-detail:InvestigationCaseResponse|null;
-
-onClose:()=>void;
-
+interface Analysis {
+    explanation: string;
+    recommendation: string;
+    confidence: number;
 }
 
 export default function CaseDetailsDrawer({
+    detail,
+    onClose
+}: Props) {
 
-detail,
+    const [loading, setLoading] = useState(false);
 
-onClose
+    const [analysis, setAnalysis] =
+        useState<Analysis | null>(null);
 
-}:Props){
+    if (!detail) {
+        return null;
+    }
 
-if(!detail){
+    const caseId = detail.overview.id;
 
-return null;
+    async function analyze() {
+        setLoading(true);
 
-}
+        try {
 
-return(
+            const [root, action] = await Promise.all([
+                explain(caseId),
+                recommend(caseId),
+            ]);
 
-<div className="drawerOverlay">
+            setAnalysis({
+                explanation: root.explanation,
+                recommendation: action.recommendation,
+                confidence: root.confidence,
+            });
 
-<div className="drawer">
+        } finally {
+            setLoading(false);
+        }
+    }
 
-<div className="drawerHeader">
+    return (
+        <div className="drawerOverlay">
+            <div className="drawer">
 
-<h2>
+                <div className="drawerHeader">
+                    <h2>{detail.overview.case_number}</h2>
+                    <button onClick={onClose}>✕</button>
+                </div>
 
-{detail.overview.case_number}
+                <p className="drawerTitle">
+                    {detail.overview.title}
+                </p>
 
-</h2>
+                <button
+                    className="analyzeBtn"
+                    disabled={loading}
+                    onClick={analyze}
+                >
+                    {loading
+                        ? "Analyzing..."
+                        : "Analyze with AI"}
+                </button>
 
-<button onClick={onClose}>
+                <h3>AI Root Cause</h3>
 
-?
+                <p>
+                    {analysis?.explanation ??
+                        "Click Analyze with AI to generate a root cause."}
+                </p>
 
-</button>
+                <h3>AI Recommendation</h3>
 
-</div>
+                <p>
+                    {analysis?.recommendation ??
+                        "Click Analyze with AI to generate a recommendation."}
+                </p>
 
-<h3>AI Explanation</h3>
+                {analysis && (
+                    <p className="confidence">
+                        Confidence: {analysis.confidence}%
+                    </p>
+                )}
 
-<p>
+                <h3>Description</h3>
 
-{detail.ai_explanation??"No explanation available."}
+                <p>
+                    {detail.overview.description ?? "-"}
+                </p>
 
-</p>
-
-<h3>AI Recommendation</h3>
-
-<p>
-
-{detail.ai_recommendation??"No recommendation available."}
-
-</p>
-
-<h3>Description</h3>
-
-<p>
-
-{detail.overview.description??"-"}
-
-</p>
-
-</div>
-
-</div>
-
-);
-
+            </div>
+        </div>
+    );
 }
