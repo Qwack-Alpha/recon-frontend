@@ -8,7 +8,12 @@ import { navigation } from "../../constants/navigation";
 
 import { useAuth } from "../../auth/useAuth";
 
-export default function Sidebar() {
+interface Props {
+    open?: boolean;
+    onClose?: () => void;
+}
+
+export default function Sidebar({ open, onClose }: Props) {
 
     const {
         user,
@@ -43,7 +48,7 @@ export default function Sidebar() {
 
     return (
 
-        <aside className="sidebar">
+        <aside className={open ? "sidebar open" : "sidebar"}>
 
             <div className="logo">
 
@@ -68,6 +73,8 @@ export default function Sidebar() {
                                 to={item.path}
 
                                 end={item.path === "/"}
+
+                                onClick={onClose}
 
                                 className={({ isActive }) =>
 

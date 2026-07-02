@@ -5,6 +5,7 @@ import {
 import {
     getDashboardReport,
     exportReport,
+    downloadReport,
 } from "../services/reportService";
 export function useReports() {
     const report = useQuery({
@@ -14,8 +15,12 @@ export function useReports() {
     const exportReportMutation = useMutation({
         mutationFn: exportReport,
     });
+    const downloadMutation = useMutation({
+        mutationFn: downloadReport,
+    });
     return {
         report,
         exportReport: exportReportMutation,
+        download: downloadMutation,
     };
 }

@@ -17,21 +17,17 @@ import type { ReconciliationItem } from "../../types/reconciliation";
 import ReconciliationStatistics from "../../components/reconciliation/ReconciliationStatistics";
 import ReconciliationFilters from "../../components/reconciliation/ReconciliationFilters";
 import ReconciliationTable from "../../components/reconciliation/ReconciliationTable";
-import ManualMatchDialog from "../../components/reconciliation/ManualMatchDialog";
 
 export default function Reconciliation() {
 
     const {
         results,
-        match,
+        run,
     } = useReconciliation();
 
     const [search, setSearch] = useState("");
 
     const [status, setStatus] = useState("ALL");
-
-    const [selected, setSelected] =
-        useState<ReconciliationItem | null>(null);
 
     const filtered = useMemo(() => {
 
@@ -80,6 +76,14 @@ export default function Reconciliation() {
                 subtitle="AI-assisted reconciliation workspace"
             />
 
+            <button
+                className="runReconBtn"
+                disabled={run.isPending}
+                onClick={() => run.mutate()}
+            >
+                {run.isPending ? "Running..." : "Run Today's Reconciliation"}
+            </button>
+
             <ReconciliationStatistics
                 items={results.data ?? []}
             />
@@ -95,33 +99,9 @@ export default function Reconciliation() {
 
                 <ReconciliationTable
                     items={filtered}
-                    onManualMatch={setSelected}
                 />
 
             </Card>
-
-            <ManualMatchDialog
-                item={selected}
-                loading={match.isPending}
-                onClose={() => setSelected(null)}
-                onSubmit={(bankTransactionId) => {
-
-                    if (!selected) return;
-
-                    match.mutate({
-
-                        payment_transaction_id:
-                            selected.payment_transaction_id,
-
-                        bank_transaction_id:
-                            bankTransactionId,
-
-                    });
-
-                    setSelected(null);
-
-                }}
-            />
 
         </PageContainer>
 

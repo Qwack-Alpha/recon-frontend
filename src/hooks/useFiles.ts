@@ -1,75 +1,75 @@
-import{
+import {
 
-useMutation,
+    useMutation,
 
-useQuery,
+    useQuery,
 
-useQueryClient
+    useQueryClient
 
-}from"@tanstack/react-query";
+} from "@tanstack/react-query";
 
 import FileService from "../services/fileService";
 
-export function useFiles(){
+export function useFiles() {
 
-const client=
+    const client =
 
-useQueryClient();
+        useQueryClient();
 
-const files=
+    const files =
 
-useQuery({
+        useQuery({
 
-queryKey:["files"],
+            queryKey: ["files"],
 
-queryFn:FileService.history
+            queryFn: FileService.history
 
-});
+        });
 
-const upload=
+    const upload =
 
-useMutation({
+        useMutation({
 
-mutationFn:({
+            mutationFn: ({
 
-bankId,
+                bankId,
 
-file
+                files
 
-}:{
+            }: {
 
-bankId:string;
+                bankId: string;
 
-file:File;
+                files: Record<string, File | null>;
 
-})=>
+            }) =>
 
-FileService.upload(
+                FileService.uploadBatch(
 
-bankId,
+                    bankId,
 
-file
+                    files
 
-),
+                ),
 
-onSuccess(){
+            onSuccess() {
 
-client.invalidateQueries({
+                client.invalidateQueries({
 
-queryKey:["files"]
+                    queryKey: ["files"]
 
-});
+                });
 
-}
+            }
 
-});
+        });
 
-return{
+    return {
 
-files,
+        files,
 
-upload
+        upload
 
-};
+    };
 
 }

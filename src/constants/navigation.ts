@@ -8,7 +8,6 @@ import {
     MdSmartToy,
     MdAssessment,
     MdHistory,
-    MdSettings,
 } from "react-icons/md";
 import type { IconType } from "react-icons";
 import type { Role } from "../auth/roles";
@@ -23,60 +22,54 @@ export const navigation: NavigationItem[] = [
         label: "Dashboard",
         path: "/",
         icon: MdDashboard,
-        roles: ["ADMIN","OPS","AUDITOR","VIEWER"]
+        roles: ["ADMIN", "OPS", "AUDITOR", "VIEWER"]
     },
     {
         label: "Files",
         path: "/files",
         icon: MdUploadFile,
-        roles: ["ADMIN","OPS","AUDITOR","VIEWER"]
+        roles: ["ADMIN", "OPS", "AUDITOR", "VIEWER"]
     },
     {
         label: "Transactions",
         path: "/transactions",
         icon: MdPayments,
-        roles: ["ADMIN","OPS","AUDITOR","VIEWER"]
+        roles: ["ADMIN", "OPS", "AUDITOR", "VIEWER"]
     },
     {
         label: "Reconciliation",
         path: "/reconciliation",
         icon: MdCompareArrows,
-        roles: ["ADMIN","OPS"]
+        roles: ["ADMIN", "OPS"]
     },
     {
         label: "Exceptions",
         path: "/exceptions",
         icon: MdWarning,
-        roles: ["ADMIN","OPS","AUDITOR"]
+        roles: ["ADMIN", "OPS", "AUDITOR"]
     },
     {
         label: "Cases",
         path: "/cases",
         icon: MdWork,
-        roles: ["ADMIN","OPS","AUDITOR"]
+        roles: ["ADMIN", "OPS", "AUDITOR"]
     },
     {
         label: "AI Copilot",
         path: "/ai",
         icon: MdSmartToy,
-        roles: ["ADMIN","OPS","AUDITOR","VIEWER"]
+        roles: ["ADMIN", "OPS", "AUDITOR", "VIEWER"]
     },
     {
         label: "Reports",
         path: "/reports",
         icon: MdAssessment,
-        roles: ["ADMIN","OPS","AUDITOR","VIEWER"]
+        roles: ["ADMIN", "OPS", "AUDITOR", "VIEWER"]
     },
     {
         label: "Audit",
         path: "/audit",
         icon: MdHistory,
-        roles: ["ADMIN","AUDITOR","OPS"]
-    },
-    {
-        label: "Settings",
-        path: "/settings",
-        icon: MdSettings,
-        roles: ["ADMIN"]
+        roles: ["ADMIN", "AUDITOR", "OPS"]
     }
 ];

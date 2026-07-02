@@ -1,57 +1,31 @@
 import api from "../api/client";
 
-import type{
+import type {
 
-ReconciliationItem,
+    ReconciliationItem
 
-RunReconciliationRequest,
+} from "../types/reconciliation";
 
-ManualMatchRequest
+export async function getResults() {
 
-}from"../types/reconciliation";
+    const response =
 
-export async function getResults(){
+        await api.get<ReconciliationItem[]>(
 
-const response=
+            "/reconciliation/results"
 
-await api.get<ReconciliationItem[]>(
+        );
 
-"/reconciliation/results"
-
-);
-
-return response.data;
+    return response.data;
 
 }
 
-export async function runReconciliation(
+export async function runReconciliation() {
 
-request:RunReconciliationRequest
+    await api.post(
 
-){
+        "/reconciliation/run"
 
-await api.post(
-
-"/reconciliation/run",
-
-request
-
-);
-
-}
-
-export async function manualMatch(
-
-request:ManualMatchRequest
-
-){
-
-await api.post(
-
-"/reconciliation/manual-match",
-
-request
-
-);
+    );
 
 }

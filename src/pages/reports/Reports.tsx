@@ -1,4 +1,3 @@
-
 import "./Reports.css";
 import { useState } from "react";
 import type { CSSProperties } from "react";
@@ -26,11 +25,11 @@ const formStyle: CSSProperties = {
     marginTop: 12,
 };
 export default function Reports() {
-    const { report, exportReport } = useReports();
+    const { report, exportReport, download } = useReports();
     const [reportType, setReportType] = useState("RECONCILIATION");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
-    const [format, setFormat] = useState("PDF");
+    const [format, setFormat] = useState("CSV");
     if (report.isLoading) {
         return <Loader />;
     }
@@ -114,9 +113,7 @@ export default function Reports() {
                             value={format}
                             onChange={e => setFormat(e.target.value)}
                         >
-                            <option value="PDF">PDF</option>
                             <option value="CSV">CSV</option>
-                            <option value="XLSX">XLSX</option>
                         </select>
                     </label>
                     <Button
@@ -127,15 +124,17 @@ export default function Reports() {
                     </Button>
                 </div>
                 {result && (
-                    <p style={{ marginTop: 16 }}>
-                        <a
-                            href={result.report_url}
-                            target="_blank"
-                            rel="noreferrer"
+                    <div className="reportReady">
+                        <span>
+                            Report ready: <strong>{result.report_name}</strong>
+                        </span>
+                        <Button
+                            loading={download.isPending}
+                            onClick={() => download.mutate(result.report_name)}
                         >
-                            Download {result.report_name}
-                        </a>
-                    </p>
+                            Download
+                        </Button>
+                    </div>
                 )}
             </Card>
         </PageContainer>

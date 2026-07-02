@@ -25,8 +25,7 @@ export type Permission =
     | "ai.use"
     | "reports.view"
     | "reports.export"
-    | "audit.view"
-    | "settings.manage";
+    | "audit.view";
 /**
  * Maps every UI permission to the set of roles the backend authorises for the
  * corresponding endpoint. Keep this in sync with the API role guards.
@@ -48,7 +47,6 @@ export const PERMISSION_ROLES: Record<Permission, Role[]> = {
     "reports.view": REQUIRE_VIEWER,
     "reports.export": REQUIRE_VIEWER,
     "audit.view": REQUIRE_AUDITOR,
-    "settings.manage": REQUIRE_ADMIN,
 };
 export function hasRole(
     role: Role | undefined | null,

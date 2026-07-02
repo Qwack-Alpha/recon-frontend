@@ -1,83 +1,51 @@
-import{
+import {
 
-useMutation,
+    useMutation,
 
-useQuery,
+    useQuery,
 
-useQueryClient
+    useQueryClient
 
-}from"@tanstack/react-query";
+} from "@tanstack/react-query";
 
-import{
+import {
 
-getResults,
+    getResults,
 
-runReconciliation,
+    runReconciliation
 
-manualMatch
+} from "../services/reconciliationService";
 
-}from"../services/reconciliationService";
+export function useReconciliation() {
 
-export function useReconciliation(){
+    const client =
 
-const client=
+        useQueryClient();
 
-useQueryClient();
+    const results =
 
-const results=
+        useQuery({
 
-useQuery({
+            queryKey: ["reconciliation"],
 
-queryKey:["reconciliation"],
+            queryFn: getResults
 
-queryFn:getResults
+        });
 
-});
+    const run =
 
-const run=
+        useMutation({
 
-useMutation({
+            mutationFn: runReconciliation,
 
-mutationFn:runReconciliation,
+            onSuccess: () => {
 
-onSuccess:()=>{
+                client.invalidateQueries({
 
-client.invalidateQueries({
+                    queryKey: ["reconciliation"]
 
-queryKey:["reconciliation"]
+                });
 
-});
+            }
 
-}
-
-});
-
-const match=
-
-useMutation({
-
-mutationFn:manualMatch,
-
-onSuccess:()=>{
-
-client.invalidateQueries({
-
-queryKey:["reconciliation"]
-
-});
-
-}
-
-});
-
-return{
-
-results,
-
-run,
-
-match
-
-};
-
-}
+        });

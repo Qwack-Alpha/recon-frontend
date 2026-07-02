@@ -8,9 +8,7 @@ import RequireRole from "./routes/RequireRole";
 import {
     REQUIRE_OPS,
     REQUIRE_AUDITOR,
-    REQUIRE_ADMIN,
 } from "./auth/roles";
-import Settings from "./pages/settings/Settings";
 import AICopilot from "./pages/ai/AICopilot";
 import Audit from "./pages/audit/Audit";
 import Cases from "./pages/cases/Cases";
@@ -47,8 +45,8 @@ export default function App() {
                         element={<Files />}
                     />
                     <Route
-                    path="transactions"
-                    element={<Transactions/>}
+                        path="transactions"
+                        element={<Transactions />}
                     />
                     <Route
                         path="reconciliation"
@@ -75,26 +73,18 @@ export default function App() {
                         }
                     />
                     <Route
-                    path="ai"
-                    element={<AICopilot/>}
+                        path="ai"
+                        element={<AICopilot />}
                     />
                     <Route
                         path="reports"
-                        element={<Reports/>}
+                        element={<Reports />}
                     />
                     <Route
                         path="audit"
                         element={
                             <RequireRole roles={REQUIRE_AUDITOR}>
                                 <Audit />
-                            </RequireRole>
-                        }
-                    />
-                    <Route
-                        path="settings"
-                        element={
-                            <RequireRole roles={REQUIRE_ADMIN}>
-                                <Settings />
                             </RequireRole>
                         }
                     />

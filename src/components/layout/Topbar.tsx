@@ -3,11 +3,16 @@ import "./Topbar.css";
 import {
     MdNotificationsNone,
     MdSearch,
+    MdMenu,
 } from "react-icons/md";
 
 import { useAuth } from "../../auth/useAuth";
 
-export default function Topbar() {
+interface Props {
+    onMenu?: () => void;
+}
+
+export default function Topbar({ onMenu }: Props) {
 
     const { user } = useAuth();
 
@@ -18,6 +23,14 @@ export default function Topbar() {
     return (
 
         <header className="topbar">
+
+            <button
+                className="iconButton menuButton"
+                onClick={onMenu}
+                aria-label="Open menu"
+            >
+                <MdMenu size={24} />
+            </button>
 
             <div className="searchBox">
 

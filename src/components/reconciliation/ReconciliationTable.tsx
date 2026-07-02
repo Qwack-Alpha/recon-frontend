@@ -1,159 +1,133 @@
 import "./ReconciliationTable.css";
 
-import type{
+import type {
 
-ReconciliationItem
+    ReconciliationItem
 
-}from"../../types/reconciliation";
+} from "../../types/reconciliation";
 
 import ConfidenceBadge from "./ConfidenceBadge";
 
-interface Props{
+interface Props {
 
-items:ReconciliationItem[];
-
-onManualMatch:(item:ReconciliationItem)=>void;
+    items: ReconciliationItem[];
 
 }
 
 export default function ReconciliationTable({
 
-items,
+    items
 
-onManualMatch
+}: Props) {
 
-}:Props){
+    return (
 
-return(
+        <table className="reconciliationTable">
 
-<table className="reconciliationTable">
+            <thead>
 
-<thead>
+                <tr>
 
-<tr>
+                    <th>
 
-<th>
+                        Payment Ref
 
-Payment Ref
+                    </th>
 
-</th>
+                    <th>
 
-<th>
+                        Bank Ref
 
-Bank Ref
+                    </th>
 
-</th>
+                    <th>
 
-<th>
+                        Amount
 
-Amount
+                    </th>
 
-</th>
+                    <th>
 
-<th>
+                        Status
 
-Status
+                    </th>
 
-</th>
+                    <th>
 
-<th>
+                        AI
 
-AI
+                    </th>
 
-</th>
+                </tr>
 
-<th>
+            </thead>
 
-Action
+            <tbody>
 
-</th>
+                {
 
-</tr>
+                    items.length ?
 
-</thead>
+                        items.map(item => (
 
-<tbody>
+                            <tr key={item.reconciliation_id}>
 
-{
+                                <td>
 
-items.length?
+                                    {item.payment_reference}
 
-items.map(item=>(
+                                </td>
 
-<tr key={item.reconciliation_id}>
+                                <td>
 
-<td>
+                                    {item.bank_reference ?? "-"}
 
-{item.payment_reference}
+                                </td>
 
-</td>
+                                <td>
 
-<td>
+                                    {item.payment_amount.toLocaleString()}
 
-{item.bank_reference??"-"}
+                                </td>
 
-</td>
+                                <td>
 
-<td>
+                                    {item.status}
 
-{item.payment_amount.toLocaleString()}
+                                </td>
 
-</td>
+                                <td>
 
-<td>
+                                    <ConfidenceBadge
 
-{item.status}
+                                        confidence={item.ai_confidence}
 
-</td>
+                                    />
 
-<td>
+                                </td>
 
-<ConfidenceBadge
+                            </tr>
 
-confidence={item.ai_confidence}
+                        ))
 
-/>
+                        :
 
-</td>
+                        <tr>
 
-<td>
+                            <td colSpan={5}>
 
-<button
+                                No reconciliation results.
 
-className="manualButton"
+                            </td>
 
-onClick={()=>onManualMatch(item)}
+                        </tr>
 
->
+                }
 
-Match
+            </tbody>
 
-</button>
+        </table>
 
-</td>
-
-</tr>
-
-))
-
-:
-
-<tr>
-
-<td colSpan={6}>
-
-No reconciliation results.
-
-</td>
-
-</tr>
-
-}
-
-</tbody>
-
-</table>
-
-);
+    );
 
 }

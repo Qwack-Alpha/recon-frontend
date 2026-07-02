@@ -1,11 +1,23 @@
-.pageContainer{
+.pageContainer {
 
-display:flex;
+    display: flex;
 
-flex-direction:column;
+    flex-direction: column;
 
-gap:24px;
+    gap: 24px;
 
-padding:28px;
+    padding: 28px;
+
+}
+
+@media(max-width:700px) {
+
+    .pageContainer {
+
+        padding: 16px;
+
+        gap: 16px;
+
+    }
 
 }

@@ -51,8 +51,8 @@ export default function Files() {
             {canUpload && (
                 <UploadCard
                     loading={upload.isPending}
-                    onUpload={(bankId, file) => {
-                        upload.mutate({ bankId, file });
+                    onUpload={(bankId, files) => {
+                        upload.mutate({ bankId, files });
                     }}
                 />
             )}
