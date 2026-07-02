@@ -12,8 +12,6 @@ import {
 
 import { useReconciliation } from "../../hooks/useReconciliation";
 
-import type { ReconciliationItem } from "../../types/reconciliation";
-
 import ReconciliationStatistics from "../../components/reconciliation/ReconciliationStatistics";
 import ReconciliationFilters from "../../components/reconciliation/ReconciliationFilters";
 import ReconciliationTable from "../../components/reconciliation/ReconciliationTable";
