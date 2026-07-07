@@ -30,6 +30,8 @@ return(
 
 <th>Case</th>
 
+<th>Transaction</th>
+
 <th>Priority</th>
 
 <th>Status</th>
@@ -57,6 +59,8 @@ onClick={()=>onOpen(item.id)}
 >
 
 <td>{item.case_number}</td>
+
+<td>{item.transaction_reference}</td>
 
 <td>
 

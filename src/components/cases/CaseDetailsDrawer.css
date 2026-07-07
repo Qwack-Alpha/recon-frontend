@@ -89,3 +89,15 @@ cursor:pointer;
     font-weight:600;
     color:#059669;
 }
+
+.drawerSubtitle{
+
+    margin-top:-8px;
+
+    margin-bottom:14px;
+
+    color:#64748B;
+
+    font-size:14px;
+
+}

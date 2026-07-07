@@ -4,6 +4,8 @@ id:string;
 
 case_number:string;
 
+transaction_reference:string;
+
 title:string;
 
 priority:string;
@@ -21,6 +23,8 @@ export interface InvestigationOverview{
 id:string;
 
 case_number:string;
+
+transaction_reference:string;
 
 title:string;
 

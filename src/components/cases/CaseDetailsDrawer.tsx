@@ -63,10 +63,14 @@ export default function CaseDetailsDrawer({
         <div className="drawerOverlay">
             <div className="drawer">
 
-                <div className="drawerHeader">
-                    <h2>{detail.overview.case_number}</h2>
-                    <button onClick={onClose}>✕</button>
-                </div>
+            <div className="drawerHeader">
+                <h2>{detail.overview.case_number}</h2>
+                <button onClick={onClose}>✕</button>
+            </div>
+
+                <p className="drawerSubtitle">
+                    Transaction: <strong>{detail.overview.transaction_reference}</strong>
+                </p>
 
                 <p className="drawerTitle">
                     {detail.overview.title}
