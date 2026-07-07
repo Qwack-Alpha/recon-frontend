@@ -40,3 +40,15 @@ color:white;
 cursor:pointer;
 
 }
+
+.actionButton:disabled{
+
+    opacity:.55;
+
+    cursor:not-allowed;
+
+    background:#CBD5E1;
+
+    color:#475569;
+
+}
