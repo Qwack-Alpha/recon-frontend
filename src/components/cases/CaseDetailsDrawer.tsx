@@ -229,14 +229,6 @@ export default function CaseDetailsDrawer({
 
                 ) : null}
 
-                <h3>Description</h3>
-
-                <p>
-
-                    {detail.overview.description ?? "-"}
-
-                </p>
-
             </div>
 
         </div>
