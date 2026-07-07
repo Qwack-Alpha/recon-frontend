@@ -19,8 +19,6 @@ interface Props {
     onClose: () => void;
 }
 
-type Analysis = AIInsightResponse;
-
 export default function CaseDetailsDrawer({
     detail,
     onClose
@@ -29,7 +27,7 @@ export default function CaseDetailsDrawer({
     const [loading, setLoading] = useState(false);
 
     const [analysis, setAnalysis] =
-        useState<Analysis | null>(null);
+        useState<AIInsightResponse | null>(null);
 
     if (!detail) {
         return null;
@@ -74,8 +72,11 @@ export default function CaseDetailsDrawer({
                     Transaction:
 
                     <strong>
+
                         {" "}
+
                         {detail.overview.transaction_reference}
+
                     </strong>
 
                 </p>
@@ -100,17 +101,17 @@ export default function CaseDetailsDrawer({
 
                         ? "Analyzing..."
 
-                        : "Analyze with AI"}
+                        : "Generate Investigation Report"}
 
                 </button>
 
-                <h3>Summary</h3>
+                <h3>Executive Summary</h3>
 
                 <p>
 
                     {analysis?.summary ??
 
-                        "Click Analyze with AI to generate an investigation summary."}
+                        "Click 'Generate Investigation Report' to generate an investigation report."}
 
                 </p>
 
@@ -120,7 +121,7 @@ export default function CaseDetailsDrawer({
 
                     {analysis?.root_cause ??
 
-                        "Root cause will appear here."}
+                        "-"}
 
                 </p>
 
@@ -146,6 +147,16 @@ export default function CaseDetailsDrawer({
 
                 {analysis && (
 
+                    <p className="confidence">
+
+                        Confidence: {analysis.confidence}%
+
+                    </p>
+
+                )}
+
+                {analysis?.evidence?.length ? (
+
                     <>
 
                         <h3>Evidence</h3>
@@ -170,9 +181,9 @@ export default function CaseDetailsDrawer({
 
                             <tbody>
 
-                                {analysis.evidence.map(item => (
+                                {analysis.evidence.map((item, index) => (
 
-                                    <tr key={item.field}>
+                                    <tr key={index}>
 
                                         <td>{item.field}</td>
 
@@ -192,9 +203,9 @@ export default function CaseDetailsDrawer({
 
                     </>
 
-                )}
+                ) : null}
 
-                {analysis && (
+                {analysis?.recommended_actions?.length ? (
 
                     <>
 
@@ -202,9 +213,9 @@ export default function CaseDetailsDrawer({
 
                         <ul className="recommendationList">
 
-                            {analysis.recommended_actions.map(action => (
+                            {analysis.recommended_actions.map((action, index) => (
 
-                                <li key={action}>
+                                <li key={index}>
 
                                     ✓ {action}
 
@@ -216,17 +227,7 @@ export default function CaseDetailsDrawer({
 
                     </>
 
-                )}
-
-                {analysis && (
-
-                    <p className="confidence">
-
-                        Confidence: {analysis.confidence}%
-
-                    </p>
-
-                )}
+                ) : null}
 
                 <h3>Description</h3>
 

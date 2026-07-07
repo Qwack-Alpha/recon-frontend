@@ -233,3 +233,32 @@
     background:#F8FAFC;
     
     }
+
+    .evidenceTable{
+        width:100%;
+        border-collapse:collapse;
+        margin-top:10px;
+        margin-bottom:18px;
+        font-size:13px;
+    }
+    
+    .evidenceTable th,
+    .evidenceTable td{
+        border:1px solid #E2E8F0;
+        padding:8px;
+        text-align:left;
+    }
+    
+    .evidenceTable th{
+        background:#F8FAFC;
+        font-weight:600;
+    }
+    
+    .recommendationList{
+        margin:8px 0 18px;
+        padding-left:20px;
+    }
+    
+    .recommendationList li{
+        margin-bottom:8px;
+    }
