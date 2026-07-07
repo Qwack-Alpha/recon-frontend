@@ -42,12 +42,34 @@ history:ConversationHistoryItem[];
 
 }
 
+export interface EvidenceItem{
+
+    field:string;
+
+    payment:string;
+
+    bank:string;
+
+    result:string;
+
+}
+
 export interface AIInsightResponse{
 
-explanation:string;
+    summary:string;
 
-recommendation:string;
+    root_cause:string;
 
-confidence:number;
+    business_explanation:string;
+
+    operational_domain:string;
+
+    business_impact:string;
+
+    confidence:number;
+
+    evidence:EvidenceItem[];
+
+    recommended_actions:string[];
 
 }
